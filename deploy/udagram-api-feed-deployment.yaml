@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-feed
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      component: backend-feed
+  template:
+    metadata:
+      labels:
+        component: backend-feed
+    spec:
+      containers:
+        - name: backend-feed
+          image: amorrison11/udagram-api-feed
+          resources:
+            requests:
+              memory: "1024Mi"
+              cpu: "0.25"
+            limits:
+              memory: "2048Mi"
+              cpu: "0.5"
+          envFrom:
+            - secretRef: 
+                name: env-secret
+            - configMapRef:
+                name: env-config
+          volumeMounts:
+          - name: aws-secret
+            mountPath: "/root/.aws"
+            readOnly: true
+      restartPolicy: Always  
+      volumes:
+      - name: aws-secret
+        secret:
+          secretName: aws-secret                
+
