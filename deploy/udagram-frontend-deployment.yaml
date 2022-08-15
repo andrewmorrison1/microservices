@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: frontend
+  template:
+    metadata:
+      labels:
+        component: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: amorrison11/udagram-frontend
+          ports:
+            - containerPort: 8082
+          resources:
+            requests:
+              memory: "1024Mi"
+              cpu: "0.25"
+            limits:
+              memory: "2048Mi"
+              cpu: "0.5"

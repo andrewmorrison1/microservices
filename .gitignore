@@ -12,6 +12,10 @@ log.txt
 .vscode/
 npm-debug.log*
 
+
+deploy/env-configmap.yaml
+deploy/env-secret.yaml
+deploy/aws-secret.yaml
 .idea/
 .ionic/
 .sourcemaps/

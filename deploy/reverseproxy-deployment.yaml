@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reverseproxy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      component: reverseproxy
+  template:
+    metadata:
+      labels:
+        component: reverseproxy
+    spec:
+      containers:
+      - image: amorrison11/reverseproxy
+        name: reverseproxy
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "1024Mi"
+            cpu: "500m"   
+        ports:
+        - containerPort: 8001
